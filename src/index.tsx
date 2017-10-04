@@ -26,6 +26,8 @@ import SettingsPage from "./pages/settingspage/StateSettingsPage";
 import SourceListPage from "./pages/SourceListPage";
 import SourcePage from "./pages/sourcepage/SourcePage";
 import SourcesLinkPage from "./pages/SourcesLinkPage";
+import AddMemberPage from "./pages/teampage/AddMemberPage";
+import TeamPage from "./pages/teampage/TeamPage";
 import ValidationPage from "./pages/validation/ValidationPage";
 import rootReducer from "./reducers";
 
@@ -58,11 +60,11 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 // Bootstrap Firebase
 let firebaseConfig = {
-    apiKey: "AIzaSyB1b8t0rbf_x2ZEhJel0pm6mQ4POZLgz-k", // It is ok for this to be public - MMM
-    authDomain: "bespoken-tools.firebaseapp.com",
-    databaseURL: "https://bespoken-tools.firebaseio.com",
-    storageBucket: "bespoken-tools.appspot.com",
-    messagingSenderId: "629657216103"
+    apiKey: "AIzaSyBfHBDy0cVUYnBL4l6_9RYubIdZSC3fG-A",
+    authDomain: "dev-bespoken-tools.firebaseapp.com",
+    databaseURL: "https://dev-bespoken-tools.firebaseio.com",
+    storageBucket: "",
+    messagingSenderId: "686431405396"
 };
 
 // Timing the firebase initialize
@@ -155,6 +157,8 @@ let render = function () {
                 </Route>
                 <Route path="/" component={Dashboard} onEnter={onEnterDashboard}>
                     <Route path="/skills" component={SourceListPage} />
+                    <Route path="/team" component={TeamPage} />
+                    <Route path="/team/new" component={AddMemberPage} />
                     <Route path="/skills/new" component={NewSourcePage} />
                     <Route path="/skills/:sourceId" onEnter={setSource} onLeave={removeSource} >
                         <IndexRoute component={SourcePage} />
