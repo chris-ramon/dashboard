@@ -7,7 +7,7 @@ import {remoteservice} from "./remote-service";
 
 export namespace source {
 
-    const SOURCE_URL: string = "http://localhost:9250/v1/";
+    const SOURCE_URL: string = "https://source-api.bespoken.tools/v1/";
     const NAME_GENERATING_URL: string = SOURCE_URL + "sourceId";
     const LINK_URL: string = SOURCE_URL + "linkSource";
     const VALIDATE_URL: string = SOURCE_URL + "validateSource";
@@ -99,28 +99,31 @@ export namespace source {
             });
     }
 
-    export function deleteSource(source: Source, auth: remoteservice.auth.Auth = remoteservice.defaultService().auth(), db: remoteservice.database.Database = remoteservice.defaultService().database()): Promise<Source> {
+    export async function deleteSource(source: Source, auth: remoteservice.auth.Auth = remoteservice.defaultService().auth(), db: remoteservice.database.Database = remoteservice.defaultService().database()): Promise<Source> {
         const user = auth.currentUser;
         const ref = db.ref();
         const key = source.id;
 
         // tslint:disable:no-null-keyword
-        return ref.child("users").child(user.uid).child("sources").child(key).set(null).then(async function () {
-            await ref.child("users").child(user.uid).child("team").once("value").then(async (team) => {
-                await Object.keys(team.val()).forEach(async (teamKey) => {
-                    await ref
-                        .child("users")
-                        .child(teamKey)
-                        .child("sources")
-                        .child(key)
-                        .set(null)
-                        .catch(err => {
-                            console.log(err);
-                        });
-                });
-            })
-            return removeMembers(user.uid, source);
-        });
+        await ref.child("users").child(user.uid).child("sources").child(key).set(null);
+        try {
+            const team = await ref.child("users").child(user.uid).child("team").once("value");
+            await Object.keys(team.val()).forEach(async (teamKey) => {
+                await ref
+                    .child("users")
+                    .child(teamKey)
+                    .child("sources")
+                    .child(key)
+                    .set(null)
+                    .catch(err => {
+                        console.log(err);
+                    });
+            });
+        }
+        catch (err) {
+            console.log(err);
+        }
+        return removeMembers(user.uid, source);
         // tslint:enable:no-null-keyword
     }
 
