@@ -13,7 +13,7 @@ export namespace user {
         userType: "viewer" | "admin";
     }
 
-    export function addTeamMemer(user: any, auth: remoteservice.auth.Auth = remoteservice.defaultService().auth(), db: remoteservice.database.Database = remoteservice.defaultService().database()): Promise<any> {
+    export function addTeamMember(user: any, auth: remoteservice.auth.Auth = remoteservice.defaultService().auth(), db: remoteservice.database.Database = remoteservice.defaultService().database()): Promise<any> {
         let currentUser = auth.currentUser;
         const member: Member = {
             email: user.email,

@@ -36,7 +36,7 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
     }
 
     async addMember(email: string, userType: string ) {
-        await UserService.addTeamMemer({email, userType});
+        await UserService.addTeamMember({email, userType});
         location.replace("/dashboard/team");
     }
 
