@@ -63,12 +63,12 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
                     {user.userType.userType}
                 </td>
                 <td style={{textAlign: "center"}}>
-                    <Checkbox
+                    (<Checkbox
                         style={{marginTop: 8}}
                         theme={CheckboxTheme}
                         label={""}
                         checked={user.userType.enableNotifications}
-                        onChange={this.handleEnableCheckChange.bind(this, user)}/>
+                        onChange={this.handleEnableCheckChange.bind(this, user)}/>)
                 </td>
             </tr>
         );
@@ -92,7 +92,7 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
                     </table>
                 </div>
                 <Link to="/team/new" style={{position: "absolute", right: "11%"}}>
-                    <Button theme={ButtonTheme} icon="add" accent mini floating/>
+                    <Button theme={ButtonTheme} icon="add" accent={true} mini={true} floating={true}/>
                 </Link>
             </div>
         );
