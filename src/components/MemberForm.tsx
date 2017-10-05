@@ -50,7 +50,7 @@ export class MemberForm extends React.Component<MemberFormProps, MemberFormState
             userType: "viewer",
         };
 
-        this.onEmailChange = this.onEmailChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleUserTypeChange = this.handleUserTypeChange.bind(this);
         this.onClick = this.onClick.bind(this);
     }
@@ -59,7 +59,7 @@ export class MemberForm extends React.Component<MemberFormProps, MemberFormState
         this.setState({...this.state, userType});
     }
 
-    onEmailChange(event: React.FormEvent) {
+    handleEmailChange(event: React.FormEvent) {
         let target = event.target as HTMLSelectElement;
         this.setState({
             email: target.value,
@@ -80,7 +80,7 @@ export class MemberForm extends React.Component<MemberFormProps, MemberFormState
                     <FormInput
                         type={"text"}
                         value={this.state.email}
-                        onChange={this.onEmailChange}
+                        onChange={this.handleEmailChange}
                         label={"Name"}
                         floatingLabel={true}
                         autoComplete={"off"}
@@ -91,9 +91,7 @@ export class MemberForm extends React.Component<MemberFormProps, MemberFormState
                         value={this.state.userType}
                         onChange={this.handleUserTypeChange} />
                 </form>
-                {this.props.error ? (
-                    <p> {this.props.error.message} </p>
-                ) : <div />}
+                {this.props.error ? <p> {this.props.error.message} </p> : <div />}
                 <Button style={{margin: "1% 10%"}} colored={true} ripple={true} raised={true} onClick={this.onClick}>Add Member</Button>
             </div>
         );

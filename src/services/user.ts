@@ -3,7 +3,7 @@ import {remoteservice} from "./remote-service";
 
 export namespace user {
 
-    const SOURCE_URL: string = "http://localhost:9250/v1/";
+    const SOURCE_URL: string = "https://source-api.bespoken.tools/v1/";
     const ADD_MEMBER_URL: string = SOURCE_URL + "addTeamMember";
     const GET_TEAM_URL: string = SOURCE_URL + "team";
 
@@ -24,14 +24,13 @@ export namespace user {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "x-access-token": "source-dev-token"
+                "x-access-token": process.env.SOURCE_API_ACCESS_TOKEN
             },
             body: JSON.stringify(member),
         }).then(function (result: any) {
             if (result.status === 200) {
                 return result.json();
             } else {
-                console.log(2);
                 return Promise.reject(new Error(result.statusText));
             }
         });
@@ -44,7 +43,7 @@ export namespace user {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "x-access-token": "source-dev-token"
+                "x-access-token": process.env.SOURCE_API_ACCESS_TOKEN
             },
             body: {},
         }).then(function (result: any) {
