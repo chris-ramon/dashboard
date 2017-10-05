@@ -39,7 +39,8 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
     }
 
     handleEnableCheckChange(currentUser: any, value: boolean) {
-        const changedCheck = {...currentUser, enableNotification: value};
+        const changedCheck = {...currentUser, userType: {...currentUser.userType, enableNotifications: value}};
+        console.log(changedCheck);
         const users = this.state.users.map(user => {
             if (user.email === currentUser.email) return changedCheck;
             return user;
@@ -59,14 +60,14 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
                     {user.email}
                 </td>
                 <td className="mdl-data-table__cell--non-numeric">
-                    {user.userType}
+                    {user.userType.userType}
                 </td>
                 <td style={{textAlign: "center"}}>
                     <Checkbox
                         style={{marginTop: 8}}
                         theme={CheckboxTheme}
                         label={""}
-                        checked={user.enableNotification}
+                        checked={user.userType.enableNotifications}
                         onChange={this.handleEnableCheckChange.bind(this, user)}/>
                 </td>
             </tr>

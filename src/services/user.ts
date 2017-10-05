@@ -5,7 +5,7 @@ export namespace user {
 
     const SOURCE_URL: string = "http://localhost:9250/v1/";
     const ADD_MEMBER_URL: string = SOURCE_URL + "addTeamMember";
-    const GET_TEAM_URL: string = SOURCE_URL + "getTeamById";
+    const GET_TEAM_URL: string = SOURCE_URL + "team";
 
     interface Member {
         email: string;
@@ -39,13 +39,14 @@ export namespace user {
 
     export function getTeam(auth: remoteservice.auth.Auth = remoteservice.defaultService().auth(), db: remoteservice.database.Database = remoteservice.defaultService().database()): Promise<any> {
         let currentUser = auth.currentUser;
-        return fetch(GET_TEAM_URL, {
-            method: "POST",
+        const GET_TEAM_URL_WITH_PARAMS = GET_TEAM_URL + "?id=" + currentUser.uid;
+        return fetch(GET_TEAM_URL_WITH_PARAMS, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "x-access-token": "source-dev-token"
             },
-            body: JSON.stringify({ id: currentUser.uid}),
+            body: {},
         }).then(function (result: any) {
             if (result.status === 200) {
                 return result.json();
