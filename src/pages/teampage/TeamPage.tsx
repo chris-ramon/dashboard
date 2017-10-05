@@ -55,22 +55,24 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
 
     render() {
         const usersRows = this.state.users && this.state.users.map(user =>
-                (<tr key={user.email}>
-                <td className="mdl-data-table__cell--non-numeric">
-                    {user.email}
-                </td>
-                <td className="mdl-data-table__cell--non-numeric">
-                    {user.userType.userType}
-                </td>
-                <td style={{textAlign: "center"}}>
-                    <Checkbox
-                        style={{marginTop: 8}}
-                        theme={CheckboxTheme}
-                        label={""}
-                        checked={user.userType.enableNotifications}
-                        onChange={this.handleEnableCheckChange.bind(this, user)}/>
-                </td>
-            </tr>)
+                (
+                    <tr key={user.email}>
+                        <td className="mdl-data-table__cell--non-numeric">
+                            {user.email}
+                        </td>
+                        <td className="mdl-data-table__cell--non-numeric">
+                            {user.userType.userType}
+                        </td>
+                        <td style={{textAlign: "center"}}>
+                            <Checkbox
+                                style={{marginTop: 8}}
+                                theme={CheckboxTheme}
+                                label={""}
+                                checked={user.userType.enableNotifications}
+                                onChange={this.handleEnableCheckChange.bind(this, user)}/>
+                        </td>
+                    </tr>
+                )
         );
         return (
             <div>
