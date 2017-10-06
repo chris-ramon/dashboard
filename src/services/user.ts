@@ -6,6 +6,7 @@ export namespace user {
     const SOURCE_URL: string = "https://source-api.bespoken.tools/v1/";
     const ADD_MEMBER_URL: string = SOURCE_URL + "addTeamMember";
     const GET_TEAM_URL: string = SOURCE_URL + "team";
+    const UPDATE_TEAM_NOTIFICATIONS_URL: string = SOURCE_URL + "updateTeamNotifications";
 
     interface Member {
         email: string;
@@ -46,6 +47,29 @@ export namespace user {
                 "x-access-token": process.env.SOURCE_API_ACCESS_TOKEN
             },
             body: {},
+        }).then(function (result: any) {
+            if (result.status === 200) {
+                return result.json();
+            } else {
+                return Promise.reject(new Error(result.statusText));
+            }
+        });
+    }
+
+    export function updateNotifications(updated: any, auth: remoteservice.auth.Auth = remoteservice.defaultService().auth(), db: remoteservice.database.Database = remoteservice.defaultService().database()): Promise<any> {
+        let currentUser = auth.currentUser;
+        console.log(updated);
+        return fetch(UPDATE_TEAM_NOTIFICATIONS_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-access-token": process.env.SOURCE_API_ACCESS_TOKEN
+            },
+            body: JSON.stringify({
+                currentUserId: currentUser.uid,
+                email: updated.email,
+                enableNotifications: updated.enableNotifications,
+            }),
         }).then(function (result: any) {
             if (result.status === 200) {
                 return result.json();
