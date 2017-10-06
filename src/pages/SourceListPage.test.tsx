@@ -12,8 +12,10 @@ import WelcomePage from "./WelcomePage";
 import { Button } from "react-toolbox/lib/button";
 
 import List from "../components/List/List";
+import {User} from "../models/user";
 
 let expect = chai.expect;
+const user: User = { userId: "test", email: "email.test" };
 
 describe("Source List Page", function () {
 
@@ -28,7 +30,7 @@ describe("Source List Page", function () {
         jsdom();
 
         it("should render correctly", function () {
-            const wrapper = mount(<SourceListPage sources={sources} finishLoading={true} />);
+            const wrapper = mount(<SourceListPage user={user} sources={sources} finishLoading={true} />);
 
             let twoPaneWrapper = wrapper.find("TwoPane");
             let leftSide = twoPaneWrapper.find(".source_list_page_left");
