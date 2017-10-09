@@ -14,7 +14,7 @@ interface TeamPageState {
     users: any[];
 }
 
-export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
+export class AddMemberPage extends React.Component<TeamPageProps, TeamPageState> {
     constructor(props: TeamPageProps) {
         super(props);
 
@@ -51,4 +51,4 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
 }
 
 export default connect(
-)(TeamPage);
+)(AddMemberPage);
