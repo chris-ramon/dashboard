@@ -162,4 +162,69 @@ describe("User Service", function () {
             });
         });
     });
+
+    describe("Tests the updateTeamNotifications function", function () {
+        let mockResponse: any;
+        let user: any;
+
+        before(function () {
+            user = {enableNotifications: true, email: "test@test.com"};
+            mockResponse = {user: {email: "test@test.com", userType: "viewer"}};
+            fetchMock.post(/https:\/\/source-api\.bespoken\.tools\/v1\/updateTeamNotifications/, mockResponse);
+        });
+
+        afterEach(function () {
+            fetchMock.reset();
+        });
+
+        after(function () {
+            fetchMock.restore();
+        });
+
+        it("Tests that the appropriate headers are sent.", function () {
+            return UserService.updateNotifications(user, mockAuth, db)
+                .then(function (value: any) {
+                    const args = fetchMock.lastCall()[1] as RequestInit;
+                    const header = args.headers;
+                    expect(args.method).to.equal("POST");
+                    expect(header["Content-Type"]).to.equal("application/json");
+                });
+        });
+
+        it("Tests the appropriate body is sent", function () {
+            return UserService.updateNotifications(user, mockAuth, db)
+                .then(function (value: any) {
+                    const args = fetchMock.lastCall()[1] as RequestInit;
+                    const body = JSON.parse(args.body);
+                    expect(body.email).to.deep.equal(user.email);
+                    expect(body.enableNotifications).to.equal(user.enableNotifications);
+                    expect(body.currentUserId).to.deep.equal(mockUser.uid);
+                });
+        });
+
+        describe("Thrown error", function () {
+            let errorResponse: () => Promise<any>;
+
+            before(function () {
+                errorResponse = () => { return Promise.reject("Error per requirements of the test."); };
+                fetchMock.restore();
+                fetchMock.post(/https:\/\/source-api\.bespoken\.tools\/v1\/updateTeamNotifications/, errorResponse);
+            });
+
+            after(function () {
+                fetchMock.restore();
+                fetchMock.post(/https:\/\/source-api\.bespoken\.tools\/v1\/updateTeamNotifications/, mockResponse);
+            });
+
+            it("Tests that an error is thrown to the catch.", function () {
+                let caughtError: Error;
+                return UserService.updateNotifications(user, mockAuth, db)
+                    .catch(function (err: Error) {
+                        caughtError = err;
+                    }).then(function () {
+                        expect(caughtError).to.exist;
+                    });
+            });
+        });
+    });
 });
