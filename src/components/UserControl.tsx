@@ -8,10 +8,10 @@ interface UserProps {
   user?: User;
   login: () => void;
   logout: () => void;
+  team?: () => void;
 }
 
 export default class UserControl extends React.Component<UserProps, any> {
-
   render() {
 
     let callback = this.props.user ? this.props.logout : this.props.login;
@@ -19,7 +19,7 @@ export default class UserControl extends React.Component<UserProps, any> {
 
     let icon = this.props.user && this.props.user.photoUrl ? (
       <img
-        style={{ borderRadius: "50%" }} /** Border Radius provides the circle */
+        style={{ borderRadius: "50%" }}
         width="32"
         height="32"
         src={this.props.user.photoUrl}
@@ -32,9 +32,11 @@ export default class UserControl extends React.Component<UserProps, any> {
       );
     return (
       <Menu
+        className="userMenu"
         icon={icon}
         position="topRight"
         menuRipple={true}>
+        {this.props.user && <MenuItem caption="Team" onClick={this.props.team}/>}
         <MenuItem
           caption={buttonText}
           onClick={callback} />

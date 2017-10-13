@@ -70,6 +70,7 @@ function mapDispatchToProps(dispatch: any) {
             return dispatch(logout());
         },
         team: function () {
+            document.getElementsByClassName("userMenu")[0].getElementsByTagName("button")[0].click();
             return dispatch(push("/team"));
         },
         getSources: function (): Promise<Source[]> {

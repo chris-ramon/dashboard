@@ -76,7 +76,7 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
         );
         return (
             <div>
-                <h3 style={{margin: "1% 10%"}}>Team List</h3>
+                <h3 style={{margin: "2% 10%"}}>Team List</h3>
                 <div style={{width: "80%", margin: "1% 10%", border: "1px solid rgba(0, 0, 0, 0.12)"}}>
                     <table style={{width: "100%"}} className="mdl-data-table mdl-js-data-table">
                         <thead>
