@@ -12,6 +12,7 @@ export interface TeamPageProps {
 interface TeamPageState {
     selected: any[];
     users: any[];
+    emailReg?: RegExp;
 }
 
 export class AddMemberPage extends React.Component<TeamPageProps, TeamPageState> {
@@ -21,6 +22,7 @@ export class AddMemberPage extends React.Component<TeamPageProps, TeamPageState>
         this.state = {
             users: [],
             selected: [],
+            emailReg: new RegExp(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/),
         };
 
         this.addMember = this.addMember.bind(this);
@@ -44,7 +46,7 @@ export class AddMemberPage extends React.Component<TeamPageProps, TeamPageState>
         return (
             <div>
                 <h3 style={{margin: "1% 10%"}}>Add new member</h3>
-                <MemberForm addMember={this.addMember} />
+                <MemberForm addMember={this.addMember} emailRule={{regex: this.state.emailReg, errorMessage: undefined }} />
             </div>
         );
     }

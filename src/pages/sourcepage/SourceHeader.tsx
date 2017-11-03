@@ -12,6 +12,7 @@ interface SourceHeaderProps {
     source: Source;
     rootStyle?: React.CSSProperties;
     tileColor?: string;
+    isOwner?: boolean;
 }
 
 interface SourceHeaderState {
@@ -63,7 +64,7 @@ export class SourceHeader extends React.Component<SourceHeaderProps, SourceHeade
                         value={source.secretKey}
                         label={"Secret Key"}
                         hidden={true}
-                        showable={true} />
+                        showable={this.props.isOwner} />
                 </Cell>
             </Grid>
         );

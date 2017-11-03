@@ -23,7 +23,7 @@ describe("SourceHeader", function () {
 
         beforeEach(function () {
             wrapper = shallow(<SourceHeader
-                source={source}
+                source={source} isOwner={true}
             />);
         });
 

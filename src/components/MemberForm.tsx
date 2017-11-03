@@ -81,7 +81,7 @@ export class MemberForm extends React.Component<MemberFormProps, MemberFormState
                         type={"text"}
                         value={this.state.email}
                         onChange={this.handleEmailChange}
-                        label={"Name"}
+                        label={"Email"}
                         floatingLabel={true}
                         autoComplete={"off"}
                         error={this.props.emailRule} />

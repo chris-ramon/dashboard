@@ -9,6 +9,7 @@ import Dialog from "react-toolbox/lib/dialog";
 import { deleteSource } from "../../actions/source";
 import { Cell, Grid } from "../../components/Grid";
 import Source from "../../models/source";
+import User from "../../models/user";
 import { State } from "../../reducers";
 
 import SourceFullSummary from "./SourceFullSummary";
@@ -18,6 +19,7 @@ const DeleteButtonTheme = require("../../themes/button_theme.scss");
 const DeleteDialogTheme = require("../../themes/dialog_theme.scss");
 
 interface SourcePageProps {
+    user: User;
     source: Source;
     goHome: () => RouterAction;
     removeSource: (source: Source) => Promise<Source>;
@@ -29,6 +31,7 @@ interface SourcePageState {
 
 function mapStateToProps(state: State.All) {
     return {
+        user: state.session.user,
         source: state.source.currentSource
     };
 }
@@ -89,6 +92,8 @@ export class SourcePage extends React.Component<SourcePageProps, SourcePageState
         const sourceName = (source) ? source.name : "this skill";
         const start = moment().subtract(7, "days");
         const end = moment();
+        const currentUserId = this.props && this.props.user && this.props.user.userId;
+        const isOwner = currentUserId && this.props && ["admin", "owner"].indexOf(this.props.source && this.props.source.members[currentUserId]) > -1;
         if (!source) {
             return (<div />);
         }
@@ -96,6 +101,7 @@ export class SourcePage extends React.Component<SourcePageProps, SourcePageState
             <span>
                 <span>
                     <SourceHeader
+                        isOwner={isOwner}
                         source={source} />
                 </span>
                 <SourceFullSummary

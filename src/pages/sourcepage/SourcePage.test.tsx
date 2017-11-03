@@ -21,6 +21,7 @@ let expect = chai.expect;
 describe("Source Page", function () {
     let logs = dummyLogs(10);
     let source = dummySources(1)[0];
+    const user: any = { isOwner: true };
 
     describe("Initial load", function () {
         let getLogs: sinon.SinonStub;
@@ -57,7 +58,7 @@ describe("Source Page", function () {
 
         it("Tests that the source details header is visible when source exists.", function () {
             const wrapper = shallow((
-                <SourcePage source={source} goHome={goHome} removeSource={removeSource} />
+                <SourcePage user={user} source={source} goHome={goHome} removeSource={removeSource} />
             ));
 
             const dataTiles = wrapper.find(SourceHeader);
@@ -66,7 +67,7 @@ describe("Source Page", function () {
 
         it("Tests that nothing is displayed when source is not defined.", function () {
             const wrapper = shallow((
-                <SourcePage source={undefined} goHome={goHome} removeSource={removeSource} />
+                <SourcePage user={user} source={undefined} goHome={goHome} removeSource={removeSource} />
             ));
 
             expect(wrapper.find(SourceHeader)).to.have.length(0);
@@ -76,7 +77,7 @@ describe("Source Page", function () {
 
         it("Tests that the source data tiles have their correct values.", function () {
             const wrapper = shallow((
-                <SourcePage source={source} goHome={goHome} removeSource={removeSource} />
+                <SourcePage user={user} source={source} goHome={goHome} removeSource={removeSource} />
             ));
 
             const dataTile = wrapper.find(SourceHeader).at(0);
@@ -85,7 +86,7 @@ describe("Source Page", function () {
 
         it("Tests that the summary view is there.", function () {
             const wrapper = shallow((
-                <SourcePage source={source} goHome={goHome} removeSource={removeSource} />
+                <SourcePage user={user} source={source} goHome={goHome} removeSource={removeSource} />
             ));
 
             expect(wrapper.find(SourceFullSummary)).to.have.length(1);
@@ -95,7 +96,7 @@ describe("Source Page", function () {
             const start = moment().subtract(7, "days");
             const end = moment();
             const wrapper = shallow((
-                <SourcePage source={source} goHome={goHome} removeSource={removeSource} />
+                <SourcePage user={user} source={source} goHome={goHome} removeSource={removeSource} />
             ));
 
             const summary = wrapper.find(SourceFullSummary);
@@ -118,7 +119,7 @@ describe("Source Page", function () {
             beforeEach(function () {
                 goHome = sinon.stub();
                 removeSource = sinon.stub().returns(Promise.resolve(source));
-                wrapper = shallow(<SourcePage source={source} goHome={goHome} removeSource={removeSource} />);
+                wrapper = shallow(<SourcePage user={user} source={source} goHome={goHome} removeSource={removeSource} />);
             });
 
             it("Tests the dialog is opened.", function () {
@@ -191,7 +192,7 @@ describe("Source Page", function () {
             before(function () {
                 goHome = sinon.stub();
                 removeSource = sinon.stub().returns(Promise.reject(new Error("Error per requirements of the test.")));
-                wrapper = shallow(<SourcePage source={source} goHome={goHome} removeSource={removeSource} />);
+                wrapper = shallow(<SourcePage user={user} source={source} goHome={goHome} removeSource={removeSource} />);
 
                 const actions = wrapper.find(Dialog).at(0).prop("actions");
                 const deleteAction = actions[1];
