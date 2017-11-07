@@ -13,6 +13,7 @@ interface TeamPageState {
     selected: any[];
     users: any[];
     emailReg?: RegExp;
+    formError?: Error;
 }
 
 export class AddMemberPage extends React.Component<TeamPageProps, TeamPageState> {
@@ -37,16 +38,20 @@ export class AddMemberPage extends React.Component<TeamPageProps, TeamPageState>
         this.setState({...this.state, users});
     }
 
-    async addMember(email: string, userType: string ) {
-        await UserService.addTeamMember({email, userType});
-        location.replace("/dashboard/team");
+    addMember(email: string, userType: string ) {
+        UserService.addTeamMember({email, userType}).then(() => {
+            location.replace("/dashboard/team");
+        }).catch(err => {
+            this.setState({...this.state, formError: err});
+        });
     }
 
     render() {
+        const emailRule = () => "Please use a valid Email";
         return (
             <div>
                 <h3 style={{margin: "1% 10%"}}>Add new member</h3>
-                <MemberForm addMember={this.addMember} emailRule={{regex: this.state.emailReg, errorMessage: undefined }} />
+                <MemberForm addMember={this.addMember} emailRule={{regex: this.state.emailReg, errorMessage: emailRule }} error={this.state.formError} />
             </div>
         );
     }
