@@ -6,6 +6,7 @@ var package = require("./package.json");
 
 var node_env = process.env.NODE_ENV;
 var logless_base = process.env.LOGLESS_BASE;
+var source_api_token = process.env.SOURCE_API_ACCESS_TOKEN;
 var pusher_app_key = process.env.PUSHER_APP_KEY;
 var projectName = "dashboard";
 var version = package.version;
@@ -19,14 +20,16 @@ var buildVariables = {
   'process.env': {
     NODE_ENV: JSON.stringify(node_env),
     LOGLESS_BASE: JSON.stringify(logless_base),
-    PUSHER_APP_KEY: JSON.stringify(pusher_app_key)
+    PUSHER_APP_KEY: JSON.stringify(pusher_app_key),
+    SOURCE_API_ACCESS_TOKEN: JSON.stringify(source_api_token)
   },
   'BASENAME': JSON.stringify("/dashboard"),
   'GOOGLE_ANALYTICS': JSON.stringify(""),
   'VERSION': JSON.stringify(version),
   'BUILD_NUMBER': JSON.stringify(buildNumber),
   'BUILD_ID': JSON.stringify(buildId),
-  'LOGLESS_BASE': JSON.stringify(logless_base)
+  'LOGLESS_BASE': JSON.stringify(logless_base),
+  'SOURCE_API_ACCESS_TOKEN': JSON.stringify(source_api_token)
 }
 
 // A list of plugins
