@@ -58,7 +58,6 @@ export namespace user {
 
     export function updateNotifications(updated: any, auth: remoteservice.auth.Auth = remoteservice.defaultService().auth(), db: remoteservice.database.Database = remoteservice.defaultService().database()): Promise<any> {
         let currentUser = auth.currentUser;
-        console.log(updated);
         return fetch(UPDATE_TEAM_NOTIFICATIONS_URL, {
             method: "POST",
             headers: {

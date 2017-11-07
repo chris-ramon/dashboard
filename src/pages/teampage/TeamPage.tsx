@@ -42,7 +42,9 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
         const changedCheck = {...currentUser, userType: {...currentUser.userType, enableNotifications: value}};
         await UserService.updateNotifications({ email: currentUser.email, enableNotifications: value });
         const users = this.state.users.map(user => {
-            if (user.email === currentUser.email) return changedCheck;
+            if (user.email === currentUser.email) {
+                return changedCheck;
+            }
             return user;
         });
         this.setState({...this.state, users});

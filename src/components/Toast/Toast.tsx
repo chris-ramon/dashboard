@@ -21,7 +21,6 @@ export class Toast extends React.Component<ToastProps, ToastState> {
 
     constructor(props: any) {
         super(props);
-        console.log(props);
     }
 
     classes() {
@@ -31,7 +30,6 @@ export class Toast extends React.Component<ToastProps, ToastState> {
     }
 
     render() {
-        console.log(this.props.type);
         return (
             <div style={this.props.style} className={this.classes()}>
                 {this.props.message}
