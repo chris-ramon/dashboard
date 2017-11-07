@@ -45,8 +45,7 @@ export namespace user {
             headers: {
                 "Content-Type": "application/json",
                 "x-access-token": process.env.SOURCE_API_ACCESS_TOKEN
-            },
-            body: {},
+            }
         }).then(function (result: any) {
             if (result.status === 200) {
                 return result.json();

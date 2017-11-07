@@ -51,8 +51,12 @@ export class TeamPage extends React.Component<TeamPageProps, TeamPageState> {
     }
 
     async getTeam(props: any) {
-        const team = await UserService.getTeam();
-        this.setState({...this.state, users: team});
+        try {
+            const team = await UserService.getTeam();
+            this.setState({...this.state, users: team});
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     render() {
