@@ -1,5 +1,6 @@
 import * as React from "react";
 import {connect} from "react-redux";
+import { replace } from "react-router-redux";
 
 import MemberForm from "../../components/MemberForm";
 import Source from "../../models/source";
@@ -40,7 +41,7 @@ export class AddMemberPage extends React.Component<TeamPageProps, TeamPageState>
 
     addMember(email: string, userType: string ) {
         UserService.addTeamMember({email, userType}).then(() => {
-            location.replace("/dashboard/team");
+            replace({...location, pathname: "/team" });
         }).catch(err => {
             this.setState({...this.state, formError: err});
         });
