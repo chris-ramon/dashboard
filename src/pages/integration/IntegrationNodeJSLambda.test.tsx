@@ -2,7 +2,7 @@ import * as chai from "chai";
 import { shallow, ShallowWrapper } from "enzyme";
 import * as React from "react";
 
-import { Grid } from "../../components/Grid";
+import { CodeSheet } from "./IntegrationSubPage";
 
 import IntegrationNodeJS from "./IntegrationNodeJSLambda";
 
@@ -10,33 +10,51 @@ const expect = chai.expect;
 
 describe("IntegrationNodeJSLambda", function () {
 
-    /**
-     * These are extremely simple pages so we're just going to test that they render without error
-     */
-    describe("Rendering with secretKey.", function () {
+    describe("Rendering with showSecret = true and a secretKey.", function () {
         let wrapper: ShallowWrapper<any, any>;
 
         before(function () {
-            wrapper = shallow(<IntegrationNodeJS secretKey={"ABC123"} />);
+            wrapper = shallow(<IntegrationNodeJS secretKey={"ABC123"} showSecret={true} />);
         });
 
-        it("Tests the page renders.", function () {
-            expect(wrapper.find(Grid)).to.have.length(1);
+        it("Tests the page renders with a secret key.", function () {
+            expect(wrapper.find(CodeSheet).at(2).childAt(0).text()).to.contain(`exports.handler = bst.Logless.capture("ABC123", function (event, context)`);
         });
     });
 
-    /**
-     * These are extremely simple pages so we're just going to test that they render without error
-     */
-    describe("Rendering without secretKey.", function () {
+    describe("Rendering with showSecret = true and without a secretKey.", function () {
         let wrapper: ShallowWrapper<any, any>;
 
         before(function () {
-            wrapper = shallow(<IntegrationNodeJS secretKey={undefined} />);
+            wrapper = shallow(<IntegrationNodeJS showSecret={true} secretKey={undefined} />);
         });
 
-        it("Tests the page renders.", function () {
-            expect(wrapper.find(Grid)).to.have.length(1);
+        it("Tests the page renders without a secret key.", function () {
+            expect(wrapper.find(CodeSheet).at(2).childAt(0).text()).to.contain(`exports.handler = bst.Logless.capture("<SECRET_KEY>", function (event, context)`);
+        });
+    });
+
+    describe("Rendering with showSecret = false and a secretKey.", function () {
+        let wrapper: ShallowWrapper<any, any>;
+
+        before(function () {
+            wrapper = shallow(<IntegrationNodeJS secretKey={"ABC123"} showSecret={false} />);
+        });
+
+        it("Tests the page renders without a secret key.", function () {
+            expect(wrapper.find(CodeSheet).at(2).childAt(0).text()).to.contain(`exports.handler = bst.Logless.capture("<SECRET_KEY>", function (event, context)`);
+        });
+    });
+
+    describe("Rendering with showSecret = false and without a secretKey.", function () {
+        let wrapper: ShallowWrapper<any, any>;
+
+        before(function () {
+            wrapper = shallow(<IntegrationNodeJS secretKey={undefined} showSecret={false} />);
+        });
+
+        it("Tests the page renders without a secret key.", function () {
+            expect(wrapper.find(CodeSheet).at(2).childAt(0).text()).to.contain(`exports.handler = bst.Logless.capture("<SECRET_KEY>", function (event, context)`);
         });
     });
 });

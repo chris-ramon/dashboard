@@ -21,11 +21,11 @@ function mapStateToProps(state: State.All) {
 }
 
 function mapDispatchToProps(dispatch: any) {
-  return {
-    goTo: function (path: string) {
-      return dispatch(replace(path));
-    }
-  };
+    return {
+        goTo: function (path: string) {
+            return dispatch(replace(path));
+        }
+    };
 }
 
 export class StateIntegrationPage extends React.Component<StateIntegrationProps, StateIntegrationState> {
@@ -33,7 +33,7 @@ export class StateIntegrationPage extends React.Component<StateIntegrationProps,
     render() {
         const { source } = this.props;
         return (
-            <IntegrationPage source={source} goTo={this.props.goTo} />
+            <IntegrationPage source={source} goTo={this.props.goTo} showSecret={true} />
         );
     }
 }
