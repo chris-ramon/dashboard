@@ -8,7 +8,9 @@ cache:
   - node_modules
   - typings/globals
 after_success:
-- npm run deploy
+  - npm run deploy
+env:
+  - API_KEY
 deploy:
   provider: releases
   api_key:
