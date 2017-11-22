@@ -18,5 +18,6 @@ deploy:
     provider: script
     script: scripts/prod-deploy.sh
     on:
+        repo: chris-ramon/dashboard
         tags: true
         all_branches: true
