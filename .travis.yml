@@ -3,7 +3,7 @@ dist: trusty
 language: node_js
 node_js:
   - "6"
-script: npm run coveralls
+#script: npm run coveralls
 branches:
  only:
    - "master"
@@ -12,8 +12,8 @@ cache:
   - node_modules
   - typings/globals
 
-after_success:
-    - npm run deploy
+#after_success:
+#    - npm run deploy
 deploy:
     provider: script
     script: scripts/prod-deploy.sh
