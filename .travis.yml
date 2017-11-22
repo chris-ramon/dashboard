@@ -19,3 +19,4 @@ deploy:
     script: scripts/prod-deploy.sh
     on:
         tags: true
+        all_branches: true
