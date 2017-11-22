@@ -4,17 +4,10 @@ language: node_js
 node_js:
   - "6"
 #script: npm run coveralls
-#branches:
-# only:
-#   - "master"
 cache:
   directories:
   - node_modules
   - typings/globals
 
-#after_success:
-#    - npm run deploy
-#on:
-#    repo: chris-ramon/dashboard
-#    tags: true
-#    all_branches: true
+after_success:
+    - npm run deploy
