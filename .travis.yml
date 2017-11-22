@@ -7,8 +7,8 @@ cache:
   directories:
   - node_modules
   - typings/globals
-after_success:
-  - npm run deploy
+#after_success:
+#  - npm run deploy
 env:
   - API_KEY
 deploy:
