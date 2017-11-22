@@ -2,12 +2,17 @@ sudo: false
 dist: trusty
 language: node_js
 node_js:
-  - "6"
-#script: npm run coveralls
+- '6'
 cache:
   directories:
   - node_modules
   - typings/globals
-
 after_success:
-    - npm run deploy
+- npm run deploy
+deploy:
+  provider: releases
+  api_key:
+    secure: API_KEY
+  file: ''
+  on:
+    repo: chris-ramon/dashboard
