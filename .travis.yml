@@ -10,11 +10,11 @@ cache:
 #after_success:
 #  - npm run deploy
 env:
-  - API_KEY
+  - API_KEY=$API_KEY
 deploy:
   provider: releases
   api_key:
-    secure: $API_KEY
+    secure: ${API_KEY}"
   file: './dist'
   on:
     repo: chris-ramon/dashboard
