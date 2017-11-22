@@ -7,14 +7,15 @@ cache:
   directories:
   - node_modules
   - typings/globals
-#after_success:
+after_success:
+  - npm run build
 #  - npm run deploy
 deploy:
   provider: releases
   api_key:
     secure: a0M1AF0wfFhQ6E2r9Bb87wXKCzi+fbFm/Ucs/AhQCFEUHhp7c7ymiyxbPugwT3Jm4f6XSucvityuUJLPpeI9bqtvvYmI6ucycz/W0hA0jqpk5yRnZ+bUnaLOi4xxhAIZGE0jKfoYjtqZryMuvJ2o9TAp8C/pqG6LhH/lmFdKLHS73rqazvXgCN0+49cAis4PMZP6Mn67Iq+qFW3b3vDK4DukmcbhH/jz1osQKwispirwvrkFnG/vQvD4Rx3y1IyqgfTsU2/syHgzisuBy5O9lA+t8BJ8P8TozDvqdgHX4t5of40wo4b9SS7SzqcpaNpkmkyU0K8bJoJ8E5MyapnuP0ULc/zAUfCdc5KuPQFiTexeA4sw79JufBQnCIbjCbBxle5ASw2d0CeEevguMh5Lo2LjoWcxWsS9lcAJRfI/QzGHcleabCICLBofnEPD0hS8sIO99Wud7nge52/wdOwVpoiu5za1Zd5N4ZL7+AzDH1Hhaj18jKbzka0sUUaTR+sr3Sg7OjhcV4tggTTEhDvBQ9LuHewgrHni+Bgsll7H7L8fvqczw3Ayskf1FJTioXmY3kMxeFi+13DQ1CISTr9Xs2UDOj/pptrel4hy/DzbcdmEw/7gO0I7x52LnxhZpcgNd/RUw+ZLgmj8CvNXmzb3a2ByP3/Q2obRpDNErzceX1M=
   file_glob: true
-  file: dist/*
+  file: dist/scripts/*
   skip_cleanup: true
   on:
     repo: chris-ramon/dashboard
