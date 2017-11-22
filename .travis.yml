@@ -13,8 +13,8 @@ deploy:
   provider: releases
   api_key:
     secure: ${API_KEY}
-  file_glob: true
-  file: ./dist/*
+  #file_glob: true
+  file: ./dist
   skip_cleanup: true
   on:
     repo: chris-ramon/dashboard
