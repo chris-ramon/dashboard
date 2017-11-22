@@ -4,9 +4,9 @@ language: node_js
 node_js:
   - "6"
 #script: npm run coveralls
-branches:
- only:
-   - "master"
+#branches:
+# only:
+#   - "master"
 cache:
   directories:
   - node_modules
@@ -14,10 +14,7 @@ cache:
 
 #after_success:
 #    - npm run deploy
-deploy:
-    provider: script
-    script: scripts/prod-deploy.sh
-    on:
-        repo: chris-ramon/dashboard
-        tags: true
-        all_branches: true
+#on:
+#    repo: chris-ramon/dashboard
+#    tags: true
+#    all_branches: true
