@@ -12,7 +12,7 @@ cache:
 deploy:
   provider: releases
   api_key:
-    secure: "${API_KEY}"
+    secure: ${API_KEY}
   file_glob: true
   file: ./dist/*
   skip_cleanup: true
