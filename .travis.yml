@@ -13,6 +13,6 @@ deploy:
   provider: releases
   api_key:
     secure: API_KEY
-  file: ''
+  file: './dist'
   on:
     repo: chris-ramon/dashboard
