@@ -1,5 +1,5 @@
 {
-  "name": "bespoken-dashboard",
+  "name": "bespoken-dashboard-chris-test",
   "version": "1.0.19",
   "description": "The dashboard for https://bespoken.tools",
   "main": "./dist/scripts/dashboard.js",
