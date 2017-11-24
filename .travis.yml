@@ -10,6 +10,9 @@ cache:
 after_success:
   - npm run build
 #  - npm run deploy
+before_deploy:
+  - ls
+  - pwd
 deploy:
   provider: releases
   api_key:
