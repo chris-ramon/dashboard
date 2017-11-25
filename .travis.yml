@@ -24,4 +24,4 @@ deploy:
   overwrite: true
   on:
     repo: chris-ramon/dashboard
-    tags: true
+    # tags: true
