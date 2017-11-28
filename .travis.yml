@@ -7,10 +7,6 @@ cache:
   directories:
   - node_modules
   - typings/globals
-before_deploy:
-  - git clone https://github.com/github/hub.git
-  - cd hub
-  - make install prefix=/usr/local
 deploy:
   provider: script
   script: scripts/prod-deploy.sh $TRAVIS_TAG
