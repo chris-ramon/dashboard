@@ -9,7 +9,7 @@ cache:
   - typings/globals
 deploy:
   provider: script
-  script: scripts/prod-deploy.sh production $TRAVIS_TAG
+  script: scripts/prod-deploy.sh $TRAVIS_TAG
   on:
     tags: true
 env:

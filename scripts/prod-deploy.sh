@@ -1,3 +1,5 @@
+echo "tag: $0"
+echo $1
 git config --global user.email "rchristian.ramon@gmail.com"
 git config --global user.name "Travis-CI"
 git config credential.helper "store --file=.git/credentials"
