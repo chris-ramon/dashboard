@@ -7,4 +7,4 @@ echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 npm run build
 ls
 git checkout master
-git add . && git commit -m "test from travis 2" && git push origin master
+git add . && git commit -m "$0" && git push origin master
