@@ -10,6 +10,7 @@ cache:
 deploy:
   provider: script
   script: scripts/prod-deploy.sh $TRAVIS_TAG
+  skip_cleanup: true
   on:
     tags: true
 env:
