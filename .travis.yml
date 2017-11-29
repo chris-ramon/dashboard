@@ -7,18 +7,11 @@ cache:
   directories:
   - node_modules
   - typings/globals
-after_success:
-  - echo $1
-  - git config --global user.email "rchristian.ramon@gmail.com"
-  - git config --global user.name "Travis-CI"
-  - git config credential.helper "store --file=.git/credentials"
-  - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
-  - npm run build
-  - ls
-  - git checkout -b release
-  - git add . && git commit -m "$0" && git push origin release
-  - curl -X POST -d '{"title":"test","head":"release","base":"master"}' -H "Content-Type: application/json" -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/chris-ramon/dashboard/pulls
-  - echo "ok"
+deploy:
+  provider: script
+  script: scripts/prod-deploy.sh
+  on:
+    tags: true
 env:
   global:
     secure: hOLH6YkSeVpQi6kkIyEFD+Z7uckp/eMEKaCoc+Ijq4+3ZgA35veERQMgb+JnObGzQ/QSC7BnCqGsKkbwpwkXKjleDD/1nEUdvBFiZ7nI6N5h7w0/eQAwD2EBH2YispqoPGXYQ6AW/dAItAAu8EHyHGZUBaVcXGSXOgwKciCn5/qgx+HFZVpth4TJcXYzCJt4UZfOPcPO1Bp5f39wQhZ8XmDI3MXj+hX7xPtarplxYlir0GNpFWDgw8KUAPPt9bU1zBfttRuz5Nfdh/irjbNmllaRaWM1kdFq0I69slEjnhZaMKTTnMe8ZmLFe/pejbcdvBXw3TILdZKmTjwbqclkU+nVYxR1Q/20+mmuo5V9qm8eOjU7vZFxhO9BzhEho+nxKx6o/pmhyfP8Wymi/mBB2rT9xk7oVpj7N2h8v9zoEhicic5cgTDiUj6cCiQ+3WOEdL8yfLm8w+yqJLJLB08WZjg/S+57a1agK725TyagTR0Bs0Zie/dUfd/ZUV4XxQiQvdA1M+LjwT+tn+7Dn2vX68mr0ym8rnDGB+stcaCTYIB/utKArqjRs7lBcG+MX+CItq/3oiNXwm15nrnj/piYjrLWM+bo8Ax6tb+UE66cDkAFcAspOOLIT+LNNlFoYXAYiiYyi8mt3AtkLjPbn35CLKtgceULabVYVLJQrBFYVCo=
