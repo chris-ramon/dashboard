@@ -9,17 +9,15 @@ cache:
   - typings/globals
 after_success:
   - ls
-  # - npm install typings -g
-  # - typings install
-  # - npm run build
-  - echo "running build"
+  - npm install typings -g
+  - typings install
+  - npm run build
 deploy:
   provider: script
   script: scripts/prod-deploy.sh
   on:
     tags: true
     condition: "$TRAVIS_TAG =~ ^prod.*$"
-    all_brances: true
   skip_cleanup: true
 env:
   global:
