@@ -8,6 +8,9 @@ cache:
   - node_modules
   - typings/globals
 after_success:
+  - ls
+  - npm install typings -g
+  - typings install
   - npm run build
 deploy:
   provider: script
