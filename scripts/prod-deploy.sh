@@ -3,6 +3,7 @@ branch=$(echo "release-$BUILD_VERSION")
 echo "TRAVIS_TAG: $TRAVIS_TAG"
 echo "BUILD_VERSION: $BUILD_VERSION"
 echo "branch: $branch"
+export BUILD_VERSION=$BUILD_VERSION
 node scripts/update-versions.js
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials
