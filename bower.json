@@ -1,6 +1,6 @@
 {
   "name": "bespoken-dashboard-chris-test",
-  "version": "1.0.19",
+  "version": "5.0.0",
   "description": "The dashboard for https://bespoken.tools",
   "main": "./dist/scripts/dashboard.js",
   "authors": [
