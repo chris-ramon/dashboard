@@ -1,6 +1,5 @@
 {
   "name": "bespoken-dashboard",
-  "version": "1.0.19",
   "description": "The dashboard for https://bespoken.tools",
   "repository": "https://github.com/bespoken/dashboard",
   "main": "./dist/scripts/dashboard.js",
