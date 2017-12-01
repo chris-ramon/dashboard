@@ -8,7 +8,9 @@ node scripts/update-versions.js
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 git checkout -b $branch
-git add . && git commit -m "${BUILD_VERSION}" && git push origin $branch
+git add .
+git commit -m "v${BUILD_VERSION}"
+git push origin $branch
 git tag $BUILD_VERSION
 git push origin $BUILD_VERSION
-curl -X POST -d '{"title":"'"$BUILD_VERSION"'","head":"'"$branch"'","base":"master"}' -H "Content-Type: application/json" -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/chris-ramon/dashboard/pulls
+curl -X POST -d '{"title":"[CD]: v'"$BUILD_VERSION"'","head":"'"$branch"'","base":"master"}' -H "Content-Type: application/json" -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/chris-ramon/dashboard/pulls
