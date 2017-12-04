@@ -9,15 +9,16 @@ cache:
   - typings/globals
 after_success:
   - ls
-  - npm install typings -g
-  - typings install
-  - npm run build
+  # - npm install typings -g
+  # - typings install
+  # - npm run build
+  - touch test1.txt
 deploy:
   provider: script
   script: scripts/prod-deploy.sh
   on:
     tags: true
-    condition: "$TRAVIS_TAG =~ ^prod.*$"
+    condition: "$TRAVIS_TAG =~ ^(prod|dev).*$"
   skip_cleanup: true
 env:
   global:
