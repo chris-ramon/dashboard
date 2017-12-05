@@ -5,14 +5,14 @@ echo "ENV: $ENV"
 echo "TRAVIS_TAG: $TRAVIS_TAG"
 echo "BUILD_VERSION: $BUILD_VERSION"
 echo "branch: $branch"
-if [ $ENV == "dev" ]; then
+if [ "$ENV" == "dev" ]; then
     echo "[CD] build dev started"
     cp -R dist/. harness/.
     firebase use default
     firebase deploy --token "$FIREBASE_TOKEN" --debug
     echo "[CD] build dev successfully finished"
 fi
-if [ $ENV == "prod"]; then
+if [ "$ENV" == "prod"]; then
     echo "[CD] build production started"
     export BUILD_VERSION=$BUILD_VERSION
     node scripts/update-versions.js
