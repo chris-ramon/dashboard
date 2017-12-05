@@ -18,7 +18,7 @@ deploy:
   script: scripts/prod-deploy.sh
   on:
     tags: true
-    condition: "$TRAVIS_TAG =~ ^(prod|dev).*$"
+    condition: "$TRAVIS_TAG =~ ^(prod|dev)-.*$"
   skip_cleanup: true
 env:
   global:
