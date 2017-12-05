@@ -25,5 +25,5 @@ if [ "$ENV" == "prod"]; then
     git tag $BUILD_VERSION
     git push origin $BUILD_VERSION
     curl -X POST -d '{"title":"[CD]: v'"$BUILD_VERSION"'","head":"'"$branch"'","base":"master"}' -H "Content-Type: application/json" -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/chris-ramon/dashboard/pulls
-fi
     echo "[CD] build production successfully finished"
+fi
