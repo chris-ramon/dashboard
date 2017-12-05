@@ -9,7 +9,7 @@ echo "branch: $branch"
 if [[ "$ENV" == "dev" ]]; then
     echo "[CD] build dev started"
     cp -R dist/. harness/.
-    firebase use default
+    firebase use dev-dashboard-bbcee
     firebase deploy --token "$FIREBASE_TOKEN" --debug
     echo "[CD] build dev successfully finished"
 fi
