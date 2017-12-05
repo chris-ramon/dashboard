@@ -1,3 +1,4 @@
+#!/bin/bash
 ENV=$(echo $TRAVIS_TAG | cut -d'-' -f 1)
 BUILD_VERSION=$(echo $TRAVIS_TAG | cut -d'-' -f 2)
 branch=$(echo "release-$BUILD_VERSION")
