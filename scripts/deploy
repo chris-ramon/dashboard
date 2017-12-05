@@ -9,11 +9,7 @@ cp -R dist/. harness/.
 if [[ $TRAVIS_PULL_REQUEST ]]; then
   echo Deploying to Build Dashboard
   firebase use build
-else
-  echo Deploying to Dev Dashboard
-  firebase use default
 fi
 
-echo "Hi"
 # And deploy the harness directory
 firebase deploy --token "$FIREBASE_TOKEN" --debug
